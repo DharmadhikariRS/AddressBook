@@ -15,9 +15,18 @@
             //contact2.Contacts("Rsd", "D", "Mumbai", "Bombay", "Maharashtra", 111111, 1000000021);
 
             //UC2
-            ContactDetailsUserInput contactDetailsUserInput = new ContactDetailsUserInput();
-            contactDetailsUserInput.ReaderContactDetails();
-            contactDetailsUserInput.DisplayContactDetails();
+            //ContactDetailsUserInput contactDetailsUserInput = new ContactDetailsUserInput();
+            //contactDetailsUserInput.ReaderContactDetails();
+            //contactDetailsUserInput.DisplayContactDetails();
+
+            //UC3
+
+            EditContactDetail editContactDetail = new EditContactDetail();
+
+            editContactDetail.Contacts("Rushi", "Dharmadhikari", "Latur", "Latur", "Maharashtra", 413512, 2000000101);
+            editContactDetail.DisplayContactDetails();
+            editContactDetail.edit();
+
         }
     }
 }
