@@ -21,11 +21,21 @@
 
             //UC3
 
-            EditContactDetail editContactDetail = new EditContactDetail();
+            //EditContactDetail editContactDetail = new EditContactDetail();
 
-            editContactDetail.Contacts("Rushi", "Dharmadhikari", "Latur", "Latur", "Maharashtra", 413512, 2000000101);
-            editContactDetail.DisplayContactDetails();
-            editContactDetail.edit();
+            //editContactDetail.Contacts("Rushi", "Dharmadhikari", "Latur", "Latur", "Maharashtra", 413512, 2000000101);
+            //editContactDetail.DisplayContactDetails();
+            //editContactDetail.edit();
+
+            //UC4
+            DeleteContact deleteContact = new DeleteContact();
+            deleteContact.Contacts("Rushi", "Dharmadhikari", "Latur", "Latur", "Maharashtra", 413512, 2000000101);
+            deleteContact.DisplayContactDetails();
+            deleteContact.DeleteContacts();
+            Console.WriteLine("After delete details are");
+            deleteContact.DisplayContactDetails();
+
+
 
         }
     }
