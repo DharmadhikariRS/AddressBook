@@ -52,7 +52,9 @@
                 Console.WriteLine("To Display details enter 4");
 
                 Console.WriteLine("To Search does anyone belong to Pune or Marashtra  enter 5");
-                Console.WriteLine("To Exit  enter 6");
+                Console.WriteLine("To View the Name who belong to Pune or Marashtra  enter 6");
+
+                Console.WriteLine("To Exit  enter 7");
                
 
                 int Case = int.Parse(Console.ReadLine());
@@ -173,7 +175,27 @@
                             Console.WriteLine("APerson belomgimg to city Pune Exists");
                         }
                         break;
+
                     case 6:
+                        Console.WriteLine("View person who belonging to Pune or Maharashtra");
+                        if (AddressDictionary.Any(x => (x.Value.city == "Pune") || (x.Value.state == "Maharashtra")))
+                        {
+                            foreach (KeyValuePair<string, AddressBookComplete> Dict in AddressDictionary)
+                            {
+
+                                if (Dict.Value.city == "Pune" || Dict.Value.state == "Maharashtra")
+                                {
+                                    Console.WriteLine("{0} Leaves in Pune", Dict.Value.FirstName);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("No one belong to Pune or Maharashtra");
+                        }
+                        break;
+                    case 7:
                         a = false;
                         Console.WriteLine("......Exited........");
                         break;
