@@ -53,8 +53,9 @@
 
                 Console.WriteLine("To Search does anyone belong to Pune or Marashtra  enter 5");
                 Console.WriteLine("To View the Name who belong to Pune or Marashtra  enter 6");
+                Console.WriteLine("To check How many person belong to Pune or Marashtra  enter 7");
 
-                Console.WriteLine("To Exit  enter 7");
+                Console.WriteLine("To Exit  enter 8");
                
 
                 int Case = int.Parse(Console.ReadLine());
@@ -172,7 +173,11 @@
 
                         if (AddressDictionary.Any(x => (x.Value.city == "Pune") || (x.Value.state == "Maharashtra")))
                         {
-                            Console.WriteLine("APerson belomgimg to city Pune Exists");
+                            Console.WriteLine("APerson belonging to city Pune Exists");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No Any Person from Pune Or Maharashtra ");
                         }
                         break;
 
@@ -196,6 +201,24 @@
                         }
                         break;
                     case 7:
+                        Console.WriteLine("View How many person who belonging to Pune or Maharashtra");
+                        int countis = 0;
+                        if (AddressDictionary.Any(x => (x.Value.city == "Pune") || (x.Value.state == "Maharashtra")))
+                        {
+                            foreach (KeyValuePair<string, AddressBookComplete> Dict in AddressDictionary)
+                            {
+
+                                if (Dict.Value.city == "Pune" || Dict.Value.state == "Maharashtra")
+                                {
+                                    countis++;
+                                    Console.WriteLine("{0} Leaves in Pune", Dict.Value.FirstName);
+                                }
+                            }
+
+                        }
+                        Console.WriteLine("{0} person belong to pune or Maharashtra", countis);
+                        break;
+                    case 8:
                         a = false;
                         Console.WriteLine("......Exited........");
                         break;
