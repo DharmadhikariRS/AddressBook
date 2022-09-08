@@ -42,15 +42,16 @@
             int count = 0;
             while (a)
             {
-                Console.WriteLine("To add details enter 1");
+                Console.WriteLine();
+                Console.WriteLine("(Duplicate entry Condition using Lambda )To add details enter 1");
 
                 Console.WriteLine("To Edit  details enter 2");
 
                 Console.WriteLine("To Delete details enter 3");
 
                 Console.WriteLine("To Display details enter 4");
-
                 Console.WriteLine("To Exit  enter 5");
+               
 
                 int Case = int.Parse(Console.ReadLine());
 
@@ -79,11 +80,51 @@
                         email = Console.ReadLine();
 
                         AddressBookComplete addressBookComplete = new AddressBookComplete(FirstName, LastName, Address, city, state, zip, phoneNumber, email);
-
-                        AddressDictionary.Add(FirstName, addressBookComplete);
-                        count++;
+                        //  foreach (KeyValuePair<string, AddressBookComplete> Dict in AddressDictionary)
+                        // {
+                        // }
+                        //Used Lambda Day23
+                        if ( AddressDictionary.Any(x => (x.Key == FirstName)))
+                            {
+                            Console.WriteLine("XX Key Already exist XX ");
+                             break;
+                            }
+                        else
+                        {
+                            AddressDictionary.Add(FirstName, addressBookComplete);
+                            count++;
+                        }
+                      
+                      
                         Console.WriteLine("+++++++++++Contact Added Successfully+++++++++++++");
                         break;
+                    case 2:
+                        Console.WriteLine("Enter Firstname to edit contact details");
+
+                        string fname = (Console.ReadLine());
+                        Console.WriteLine("Enter following numbers to edit peryicular field");
+                        Console.WriteLine("1-LastName\n 2-Address \n 3-city\n 4-state \n 5-zip \n 6-phoneNum \n 7-email");
+                        int field = int.Parse(Console.ReadLine());
+
+                        foreach (var Dict in AddressDictionary)
+                        {
+                            if (Dict.Key == fname)
+                            {
+                                Console.WriteLine("Details for {0} is= " + fname);
+                                Dict.Value.EditValues(field);
+                            }
+                        }
+                        break;
+                    case 3:
+
+                        Console.WriteLine("Enter FirstNmae to Delete Contact");
+                        string fname1 = (Console.ReadLine());
+
+                        AddressDictionary.Remove(fname1);
+                        Console.WriteLine("----------Contact Deleted Successfully----------------");
+                        count--;
+                        break;
+
                     case 4:
                         if (count > 0)
                         {
@@ -122,46 +163,17 @@
                             Console.WriteLine("********No contact to display**********");
                         }
                         break;
-                    case 2:
-                        Console.WriteLine("Enter Firstname to edit contact details");
-
-                        string fname = (Console.ReadLine());
-                        Console.WriteLine("Enter following numbers to edit peryicular field");
-                        Console.WriteLine("1-LastName\n 2-Address \n 3-city\n 4-state \n 5-zip \n 6-phoneNum \n 7-email");
-                        int field = int.Parse(Console.ReadLine());
-
-                        foreach (var Dict in AddressDictionary)
-                        {
-                            if (Dict.Key == fname)
-                            {
-                                Console.WriteLine("Details for {0} is= " + fname);
-                                Dict.Value.EditValues(field);
-                            }
-                        }
-                        break;
-                    case 3:
-
-                        Console.WriteLine("Enter FirstNmae to Delete Contact");
-                        string fname1 = (Console.ReadLine());
-
-                        AddressDictionary.Remove(fname1);
-                        Console.WriteLine("----------Contact Deleted Successfully----------------");
-                        count--;
-                        break;
-
+                  
                     case 5:
                         a = false;
                         Console.WriteLine("......Exited........");
                         break;
-
+                   
                     default:
                         Console.WriteLine("Enter correct Number");
                         break;
 
                 }
-
-
-
             }
 
         }

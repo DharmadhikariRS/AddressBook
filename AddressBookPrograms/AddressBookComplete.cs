@@ -8,6 +8,7 @@ namespace AddressBookPrograms
 {
     internal class AddressBookComplete
     {
+        public
         string FirstName, LastName, Address, city, state, email;
         int zip; long phoneNumber;
 
