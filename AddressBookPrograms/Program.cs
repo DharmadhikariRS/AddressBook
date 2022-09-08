@@ -50,7 +50,9 @@
                 Console.WriteLine("To Delete details enter 3");
 
                 Console.WriteLine("To Display details enter 4");
-                Console.WriteLine("To Exit  enter 5");
+
+                Console.WriteLine("To Search does anyone belong to Pune or Marashtra  enter 5");
+                Console.WriteLine("To Exit  enter 6");
                
 
                 int Case = int.Parse(Console.ReadLine());
@@ -163,8 +165,15 @@
                             Console.WriteLine("********No contact to display**********");
                         }
                         break;
-                  
                     case 5:
+                        Console.WriteLine("Searching person who belong to Pune or Maharashtra");
+
+                        if (AddressDictionary.Any(x => (x.Value.city == "Pune") || (x.Value.state == "Maharashtra")))
+                        {
+                            Console.WriteLine("APerson belomgimg to city Pune Exists");
+                        }
+                        break;
+                    case 6:
                         a = false;
                         Console.WriteLine("......Exited........");
                         break;
