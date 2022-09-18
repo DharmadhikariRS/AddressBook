@@ -10,7 +10,8 @@ namespace AddressBookPrograms
     {
         public
         string FirstName, LastName, Address, city, state, email;
-        int zip; long phoneNumber;
+       public int zip;
+        public long phoneNumber;
 
         public AddressBookComplete(string FirstName, string LastName, string Address, string city, string state, int zip, long phoneNumber, string email)
         {
