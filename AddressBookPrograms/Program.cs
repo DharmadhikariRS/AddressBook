@@ -6,26 +6,37 @@ namespace AddressBookPrograms
     {
         public static string path;
         public static Dictionary<string, AddressBookComplete> AddressDictionary = new Dictionary<string, AddressBookComplete>();
+
+        //Using CSV
         public static void SerializationMethod()
         {
-            path = @"C:\Users\Shree\Desktop\Bootcamp\LinuxBatch-560\.netown\AddressBook\AddressBookPrograms\ContactBook.json";
-            FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter streamWriter = new StreamWriter(fileStream);
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.Serialize(streamWriter, AddressDictionary);
-            streamWriter.Close();
-            fileStream.Close();
+            path = @"C:\Users\Shree\Desktop\Bootcamp\LinuxBatch-560\GIT2\AddressBook\AddressBookPrograms\ContactBook.csv";
+            try
+            {
+                String csv = String.Join(Environment.NewLine, AddressDictionary.Select(d => $"{d.Key},{d.Value.FirstName},{d.Value.LastName},{d.Value.Address},{d.Value.city},{d.Value.state},{d.Value.zip},{d.Value.phoneNumber},{d.Value.email}"));
+                File.WriteAllText(path, csv);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         public static void DeSerializationMethod()
         {
+            path = @"C:\Users\Shree\Desktop\Bootcamp\LinuxBatch-560\GIT2\AddressBook\AddressBookPrograms\ContactBook.csv";
             try
+
             {
-                path = @"C:\Users\Shree\Desktop\Bootcamp\LinuxBatch-560\.netown\AddressBook\AddressBookPrograms\ContactBook.json";
-                JsonSerializer desrializer = new JsonSerializer();
-                using (StreamReader SR = new StreamReader(path))
+                using (var reader = new StreamReader(path))
                 {
-                    JsonReader jsonReader = new JsonTextReader(SR);
-                    AddressDictionary = desrializer.Deserialize<Dictionary<string, AddressBookComplete>>(jsonReader);
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        if (line == null) continue;
+                        var values = line.Split(',');
+                        AddressBookComplete addressBookComplete = new AddressBookComplete(values[1], values[2], values[3], values[4], values[5], int.Parse(values[6]), long.Parse(values[7]), values[8]);
+                        AddressDictionary.Add(values[0], addressBookComplete);
+                    }
                 }
             }
             catch (Exception ex)
@@ -33,6 +44,34 @@ namespace AddressBookPrograms
                 Console.WriteLine(ex.Message);
             }
         }
+        //Using Json
+        //public static void SerializationMethod()
+        //{
+        //    path = @"C:\Users\Shree\Desktop\Bootcamp\LinuxBatch-560\GIT2\AddressBook\AddressBookPrograms\ContactBook.json";
+        //    FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+        //    StreamWriter streamWriter = new StreamWriter(fileStream);
+        //    JsonSerializer serializer = new JsonSerializer();
+        //    serializer.Serialize(streamWriter, AddressDictionary);
+        //    streamWriter.Close();
+        //    fileStream.Close();
+        //}
+        //public static void DeSerializationMethod()
+        //{
+        //    try
+        //    {
+        //        path = @"C:\Users\Shree\Desktop\Bootcamp\LinuxBatch-560\GIT2\AddressBook\AddressBookPrograms\ContactBook.json";
+        //        JsonSerializer desrializer = new JsonSerializer();
+        //        using (StreamReader SR = new StreamReader(path))
+        //        {
+        //            JsonReader jsonReader = new JsonTextReader(SR);
+        //            AddressDictionary = desrializer.Deserialize<Dictionary<string, AddressBookComplete>>(jsonReader);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //}
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book");
